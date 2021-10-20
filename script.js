@@ -1,26 +1,33 @@
 const grid = document.getElementById("grid");
 
+// clears the grid
+const clearBtn = document.getElementById("clearBtn");
+clearBtn.addEventListener("click", () => {
+  grid.innerHTML = "";
+  setupGrid();
+});
+
 function createGrid(size) {
   grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
   grid.style.gridTemplateRows = `repeat(${size}, 1fr)`;
 
   for (let i = 1; i <= size * size; i++) {
     const gridElement = document.createElement("div");
-    // gridElement.style.border = "1px solid gray";
-    gridElement.addEventListener("mouseenter", changeColor);
+    gridElement.addEventListener("mouseover", changeColor);
     grid.appendChild(gridElement);
   }
 }
 
 function changeColor(e) {
-  e.target.style.backgroundColor = "black";
+  const randomR = Math.floor(Math.random() * 256);
+  const randomG = Math.floor(Math.random() * 256);
+  const randomB = Math.floor(Math.random() * 256);
+  e.target.style.backgroundColor = `rgb(${randomR}, ${randomG}, ${randomB})`;
 }
 
-createGrid(16);
+function setupGrid() {
+  gridSize = window.prompt("Input grid size:");
+  createGrid(gridSize);
+}
 
-// clears the grid
-const clearBtn = document.getElementById("clearBtn");
-clearBtn.addEventListener("click", () => {
-  grid.innerHTML = "";
-  createGrid(16);
-});
+setupGrid();
