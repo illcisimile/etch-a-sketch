@@ -1,3 +1,3 @@
-Etch A Sketch
+# etch-a-sketch
 
-No design yet but the function is working properly.
+[Live Preview](https://illcisimile.github.io/etch-a-sketch/)
