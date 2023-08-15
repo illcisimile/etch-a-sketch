@@ -33,7 +33,7 @@ h1 {
   background-color: black;
   color: white;
   cursor: pointer;
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 input[type='color'] {
@@ -60,11 +60,12 @@ input[type='color']::-moz-color-swatch {
 }
 
 #colorPicker:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 .individual-grid {
   user-select: none;
+  cursor: url('cursor.cur'), auto;
 }
 
 #grid {
