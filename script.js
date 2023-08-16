@@ -1,39 +1,34 @@
 const DEFAULT_COLOR = '#000000';
 const DEFAULT_MODE = 'color';
-const DEFAULT_SIZE = 16;
+const DEFAULT_SIZE = '16';
 
 let currentColor = DEFAULT_COLOR;
 let currentMode = DEFAULT_MODE;
-
+let currentSize = DEFAULT_SIZE;
 let mouseDown = false;
-document.body.onmousedown = () => (mouseDown = true);
-document.body.onmouseup = () => (mouseDown = false);
+
+const grid = document.getElementById('grid');
+const colorPicker = document.getElementById('colorPicker');
+const colorBtn = document.getElementById('colorBtn');
+const eraserBtn = document.getElementById('eraserBtn');
+const clearBtn = document.getElementById('clearBtn');
+const sizeValue = document.getElementById('sizeValue');
+const sizeRange = document.getElementById('sizeRange');
+
+// used addeventlistener because the input range breaks on firefox
+document.body.addEventListener('mousedown', () => (mouseDown = true));
+document.body.addEventListener('mouseup', () => (mouseDown = false));
 
 const setColor = (color) => (currentColor = color);
 const setMode = (mode) => (currentMode = mode);
-
-const changeColor = (e) => {
-  if (e.type === 'mouseover' && !mouseDown) return;
-
-  // const randomR = Math.floor(Math.random() * 256);
-  // const randomG = Math.floor(Math.random() * 256);
-  // const randomB = Math.floor(Math.random() * 256);
-
-  // e.target.style.backgroundColor = `rgb(${randomR}, ${randomG}, ${randomB})`;
-
-  switch (currentMode) {
-    case 'color':
-      e.target.style.backgroundColor = currentColor;
-      break;
-    case 'eraser':
-      e.target.style.backgroundColor = '#ffffff';
-      break;
-    default:
-      e.target.style.backgroundColor = currentColor;
-  }
-};
+const setSize = (size) => (currentSize = size);
 
 const setupGrid = (size) => createGrid(size);
+
+const clearGrid = () => {
+  grid.innerHTML = '';
+  setupGrid(currentSize);
+};
 
 const createGrid = (size) => {
   grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
@@ -49,25 +44,59 @@ const createGrid = (size) => {
   }
 };
 
-const grid = document.getElementById('grid');
+const changeColor = (e) => {
+  if (e.type === 'mouseover' && !mouseDown) return;
 
-const colorPicker = document.getElementById('colorPicker');
+  switch (currentMode) {
+    case 'color':
+      e.target.style.backgroundColor = currentColor;
+      break;
+    case 'eraser':
+      e.target.style.backgroundColor = '#ffffff';
+      break;
+    default:
+      e.target.style.backgroundColor = currentColor;
+  }
+};
+
+const setActiveButton = (mode) => {
+  switch (mode) {
+    case 'color':
+      eraserBtn.classList.remove('active');
+      colorBtn.classList.add('active');
+      break;
+    case 'eraser':
+      colorBtn.classList.remove('active');
+      eraserBtn.classList.add('active');
+      break;
+  }
+};
+
 colorPicker.oninput = (e) => setColor(e.target.value);
 
-const colorBtn = document.getElementById('colorBtn');
-colorBtn.onclick = () => setMode('color');
+colorBtn.onclick = () => {
+  setMode('color');
+  setActiveButton('color');
+};
 
-const eraserBtn = document.getElementById('eraserBtn');
-eraserBtn.onclick = () => setMode('eraser');
+eraserBtn.onclick = () => {
+  setMode('eraser');
+  setActiveButton('eraser');
+};
 
-// clears the grid
-const clearBtn = document.getElementById('clearBtn');
-clearBtn.addEventListener('click', () => {
-  grid.innerHTML = '';
-  setupGrid(DEFAULT_SIZE);
-});
+clearBtn.onclick = () => clearGrid();
+
+sizeRange.onmousemove = (e) => {
+  sizeValue.textContent = `${e.target.value} x ${e.target.value}`;
+};
+
+sizeRange.oninput = (e) => {
+  setSize(e.target.value);
+  clearGrid();
+};
 
 window.onload = () => {
   setupGrid(DEFAULT_SIZE);
-  colorPicker.value = '#000000';
+  colorPicker.value = DEFAULT_COLOR;
+  sizeRange.value = DEFAULT_SIZE;
 };

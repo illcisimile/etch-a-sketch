@@ -14,10 +14,23 @@
       <h1>etch-a-sketch</h1>
       <div id="grid" class="grid"></div>
       <div class="options">
-        <input type="color" id="colorPicker" />
-        <button id="colorBtn" class="btn">color</button>
-        <button id="eraserBtn" class="btn">eraser</button>
-        <button id="clearBtn" class="btn">clear</button>
+        <div class="button-options">
+          <input type="color" id="colorPicker" />
+          <button id="colorBtn" class="btn active">color</button>
+          <button id="eraserBtn" class="btn">eraser</button>
+          <button id="clearBtn" class="btn">clear</button>
+        </div>
+        <div class="sizeChooser">
+          <label for="sizeRange" id="sizeValue">16 x 16</label>
+          <input
+            type="range"
+            min="16"
+            max="64"
+            id="sizeRange"
+            value="16"
+            step="4"
+          />
+        </div>
       </div>
     </div>
   </body>

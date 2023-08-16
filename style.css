@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+html {
+  font-family: 'Poppins', sans-serif;
+}
+
 body {
   height: 100vh;
   display: flex;
@@ -7,6 +13,10 @@ body {
 
 h1 {
   font-size: xx-large;
+}
+
+label {
+  font-size: x-large;
 }
 
 .container {
@@ -19,7 +29,23 @@ h1 {
 
 .options {
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+}
+
+.button-options {
+  display: flex;
   gap: 16px;
+}
+
+.sizeChooser {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
 }
 
 .btn {
@@ -34,6 +60,11 @@ h1 {
   color: white;
   cursor: pointer;
   transform: scale(1.05);
+}
+
+button.active {
+  background-color: black;
+  color: white;
 }
 
 input[type='color'] {
