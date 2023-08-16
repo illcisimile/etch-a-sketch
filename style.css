@@ -4,6 +4,10 @@ html {
   font-family: 'Poppins', sans-serif;
 }
 
+button {
+  font-family: inherit;
+}
+
 body {
   height: 100vh;
   display: flex;
