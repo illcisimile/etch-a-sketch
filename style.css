@@ -103,6 +103,10 @@ input[type='color']::-moz-color-swatch {
   cursor: url('cursor.cur'), auto;
 }
 
+#sizeRange {
+  cursor: pointer;
+}
+
 #grid {
   display: grid;
   height: 500px;
